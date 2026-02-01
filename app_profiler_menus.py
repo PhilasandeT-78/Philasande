@@ -3,13 +3,13 @@ import pandas as pd
 import numpy as np
 
 # Set page title
-st.set_page_config(page_title="Researcher Profile and STEM Data Explorer", layout="wide")
+st.set_page_config(page_title="Data Analyst Profile", layout="wide")
 
 # Sidebar Menu
 st.sidebar.title("Navigation")
 menu = st.sidebar.radio(
     "Go to:",
-    ["Researcher Profile", "Publications", "STEM Data Explorer", "Contact"],
+    ["R Profile", "Publications", "STEM Data Explorer", "Contact"],
 )
 
 # Dummy STEM data
@@ -33,12 +33,12 @@ weather_data = pd.DataFrame({
 })
 
 # Sections based on menu selection
-if menu == "Researcher Profile":
-    st.title("Researcher Profile")
+if menu == "Data analyst Profile":
+    st.title("Data Analyst Profile")
     st.sidebar.header("Profile Options")
 
     # Collect basic information
-    name = "Philasande Tshusha"
+    name = "Khethiwe Ntshangase"
     field = "Mathematics and Physics"
     institution = "Cape Peninsula University of Technology"
 
@@ -131,7 +131,8 @@ elif menu == "STEM Data Explorer":
 elif menu == "Contact":
     # Add a contact section
     st.header("Contact Information")
-    email = "jane.doe@example.com"
+    email = "khethiwentshangase22@gmail.com"
 
     st.write(f"You can reach me at {email}.")
+
 
