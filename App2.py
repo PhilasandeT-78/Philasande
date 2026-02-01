@@ -248,27 +248,13 @@ elif menu == "Education":
 
     st.markdown('<div class="section-title">🎓 Education</div>', unsafe_allow_html=True)
 
+    # ---------------------------------------------------
+    # Postgraduate Diploma
+    # ---------------------------------------------------
     st.markdown("""
     <div class="card">
     <h3>Postgraduate Diploma in Mathematical Science (NQF 8)</h3>
-    <b>Status:</b> Currently Pursuing
-    <ul>
-        <li>Bayesian Statistics</li>
-        <li>Advanced Programming for Data Science</li>
-        <li>Machine Learning</li>
-        <li>Data Engineering & Visualisation</li>
-    </ul>
-    </div>
-    """, unsafe_allow_html=True)
-
-    selif menu == "Education":
-
-    st.header("Education")
-
-    st.markdown("""
-    <div class="card">
-    <h3>Postgraduate Diploma in Mathematical Science (NQF 8)</h3>
-    <b>Status:</b> Currently Pursuing
+    <p class="small-text"><b>Status:</b> Currently Pursuing</p>
 
     <h4>Coursework</h4>
     <ul>
@@ -277,6 +263,9 @@ elif menu == "Education":
         <li>Convex Optimisation</li>
         <li>Machine Learning 5A & 5B</li>
         <li>Data Engineering & Visualisation</li>
+        <li>Mathematical Modelling</li>
+        <li>Computational Methods</li>
+        <li>Research Project</li>
     </ul>
 
     <h4>Tools</h4>
@@ -284,26 +273,50 @@ elif menu == "Education":
     </div>
     """, unsafe_allow_html=True)
 
-    st.subheader("Advanced Diploma in Mathematical Science")
-    st.caption("Cape Peninsula University of Technology | 2025")
-    st.write("""
-    Relevant Coursework:
-    - Machine Learning & Data Science
-    - Mathematical Statistics
-    - Numerical Methods
-    - Mathematical Analysis
-    - Biostatistics
-    """)
+    # ---------------------------------------------------
+    # Advanced Diploma
+    # ---------------------------------------------------
+    st.markdown("""
+    <div class="card">
+    <h3>Advanced Diploma in Mathematical Science (NQF 7)</h3>
+    <p class="small-text">Cape Peninsula University of Technology · 2025</p>
 
-    st.subheader("Diploma in Mathematical Science")
-    st.caption("Cape Peninsula University of Technology | 2022 – 2024")
-    st.write("""
-    - Programming (Python, R, SAS)
-    - Data Management
-    - Operations Research
-    - Biomathematics
-    - Mathematical Science Project
-    """)
+    <h4>Coursework</h4>
+    <ul>
+        <li>Machine Learning & Data Science</li>
+        <li>Mathematical Statistics</li>
+        <li>Numerical Methods</li>
+        <li>Mathematical Analysis</li>
+        <li>Biostatistics</li>
+        <li>Time Series Analysis</li>
+        <li>Financial Mathematics</li>
+    </ul>
+
+    <h4>Tools</h4>
+    Python · R · SAS · SQL · Power BI
+    </div>
+    """, unsafe_allow_html=True)
+
+    # ---------------------------------------------------
+    # Diploma
+    # ---------------------------------------------------
+    st.markdown("""
+    <div class="card">
+    <h3>Diploma in Mathematical Science</h3>
+    <p class="small-text">Cape Peninsula University of Technology · 2022 – 2024</p>
+
+    <h4>Coursework</h4>
+    <ul>
+        <li>Programming (Python, R, SAS)</li>
+        <li>Data Management</li>
+        <li>Operations Research</li>
+        <li>Biomathematics</li>
+        <li>Mathematical Statistics</li>
+        <li>Mathematical Science Project</li>
+    </ul>
+    </div>
+    """, unsafe_allow_html=True)
+
 
 # ---------------------------------------------------
 # CONTACT
@@ -342,6 +355,7 @@ elif menu == "Contact":
 
         if st.button("Send"):
             st.success("Thank you! Your message has been sent.")
+
 
 
 
