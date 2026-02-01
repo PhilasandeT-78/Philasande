@@ -1,138 +1,238 @@
 import streamlit as st
 import pandas as pd
-import numpy as np
 
-# Set page title
-st.set_page_config(page_title="Data Analyst Profile", layout="wide")
+# -------------------------------------------------
+# PAGE CONFIG
+# -------------------------------------------------
+st.set_page_config(
+    page_title="Philasande Tshusha | Data Analyst Portfolio",
+    page_icon="📊",
+    layout="wide"
+)
 
-# Sidebar Menu
-st.sidebar.title("Navigation")
+# -------------------------------------------------
+# GLOBAL STYLES
+# -------------------------------------------------
+st.markdown("""
+<style>
+.hero {
+    background: linear-gradient(120deg, #0b5fff, #4f8cff);
+    padding: 40px;
+    border-radius: 18px;
+    color: white;
+}
+.hero h1 { font-size: 48px; margin-bottom: 0; }
+.hero p { font-size: 18px; opacity: 0.95; }
+
+.kpi {
+    background: #f5f7ff;
+    padding: 18px;
+    border-radius: 14px;
+    text-align: center;
+}
+
+.timeline {
+    border-left: 3px solid #0b5fff;
+    padding-left: 20px;
+    margin-left: 5px;
+}
+
+.card {
+    background: #ffffff;
+    padding: 18px;
+    border-radius: 14px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+}
+
+.skill-bar {
+    height: 8px;
+    background: #e0e6ff;
+    border-radius: 5px;
+}
+.skill-fill {
+    height: 8px;
+    background: #0b5fff;
+    border-radius: 5px;
+}
+</style>
+""", unsafe_allow_html=True)
+
+# -------------------------------------------------
+# SIDEBAR
+# -------------------------------------------------
 menu = st.sidebar.radio(
-    "Go to:",
-    ["R Profile", "Publications", "STEM Data Explorer", "Contact"],
+    "📌 Navigation",
+    ["Home", "About", "Skills", "Experience", "Projects", "Education", "Contact"]
 )
 
-# Dummy STEM data
-physics_data = pd.DataFrame({
-    "Experiment": ["Alpha Decay", "Beta Decay", "Gamma Ray Analysis", "Quark Study", "Higgs Boson"],
-    "Energy (MeV)": [4.2, 1.5, 2.9, 3.4, 7.1],
-    "Date": pd.date_range(start="2024-01-01", periods=5),
-})
+# -------------------------------------------------
+# HOME
+# -------------------------------------------------
+if menu == "Home":
 
-astronomy_data = pd.DataFrame({
-    "Celestial Object": ["Mars", "Venus", "Jupiter", "Saturn", "Moon"],
-    "Brightness (Magnitude)": [-2.0, -4.6, -1.8, 0.2, -12.7],
-    "Observation Date": pd.date_range(start="2024-01-01", periods=5),
-})
+    st.markdown("""
+    <div class="hero">
+        <h1>Philasande Tshusha</h1>
+        <p>Junior Data Analyst • Mathematical Science • Turning Data into Decisions</p>
+    </div>
+    """, unsafe_allow_html=True)
 
-weather_data = pd.DataFrame({
-    "City": ["Cape Town", "London", "New York", "Tokyo", "Sydney"],
-    "Temperature (°C)": [25, 10, -3, 15, 30],
-    "Humidity (%)": [65, 70, 55, 80, 50],
-    "Recorded Date": pd.date_range(start="2024-01-01", periods=5),
-})
+    st.write("")
 
-# Sections based on menu selection
-if menu == "Data analyst Profile":
-    st.title("Data Analyst Profile")
-    st.sidebar.header("Profile Options")
+    col1, col2, col3, col4 = st.columns(4)
+    col1.markdown('<div class="kpi"><h2>3+</h2><p>Years Study</p></div>', unsafe_allow_html=True)
+    col2.markdown('<div class="kpi"><h2>15+</h2><p>Datasets Analyzed</p></div>', unsafe_allow_html=True)
+    col3.markdown('<div class="kpi"><h2>5+</h2><p>Dashboards Built</p></div>', unsafe_allow_html=True)
+    col4.markdown('<div class="kpi"><h2>2</h2><p>Public Sector Roles</p></div>', unsafe_allow_html=True)
 
-    # Collect basic information
-    name = "Khethiwe Ntshangase"
-    field = "Mathematics and Physics"
-    institution = "Cape Peninsula University of Technology"
+    st.divider()
 
-    # Display basic profile information
-    st.write(f"**Name:** {name}")
-    st.write(f"**Field of Research:** {field}")
-    st.write(f"**Institution:** {institution}")
-    
-    st.image(
-    "https://th.bing.com/th/id/OIP.LxP1qwPjHE1CDFmLBh3bxQHaDu?w=338&h=175&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
-    caption="Nature (Pixabay)"
-)
+    col1, col2 = st.columns([2,1])
+    with col1:
+        st.subheader("👋 Who I Am")
+        st.write("""
+        I am a **Mathematical Science graduate and Junior Data Analyst** with experience in
+        public sector analytics, survey data analysis, dashboard development, and applied modeling.
 
-elif menu == "Publications":
-    st.title("Publications")
-    st.sidebar.header("Upload and Filter")
+        I enjoy working at the intersection of **statistics, programming, and decision-making**.
+        """)
 
-    # Upload publications file
-    uploaded_file = st.file_uploader("Upload a CSV of Publications", type="csv")
-    if uploaded_file:
-        publications = pd.read_csv(uploaded_file)
-        st.dataframe(publications)
+    with col2:
+        st.image(
+            "https://media.licdn.com/dms/image/v2/D4D35AQG6X6LSjA1GwQ/profile-framedphoto-shrink_400_400/B4DZX3nnFdGwAc-/0/1743616111229",
+            width=260
+        )
 
-        # Add filtering for year or keyword
-        keyword = st.text_input("Filter by keyword", "")
-        if keyword:
-            filtered = publications[
-                publications.apply(lambda row: keyword.lower() in row.astype(str).str.lower().values, axis=1)
-            ]
-            st.write(f"Filtered Results for '{keyword}':")
-            st.dataframe(filtered)
-        else:
-            st.write("Showing all publications")
+# -------------------------------------------------
+# ABOUT
+# -------------------------------------------------
+elif menu == "About":
 
-        # Publication trends
-        if "Year" in publications.columns:
-            st.subheader("Publication Trends")
-            year_counts = publications["Year"].value_counts().sort_index()
-            st.bar_chart(year_counts)
-        else:
-            st.write("The CSV does not have a 'Year' column to visualize trends.")
+    st.header("About Me")
+    st.write("""
+    My background in **Mathematical Science** gives me a strong analytical foundation,
+    while my practical experience allows me to deliver **real-world data solutions**.
+    """)
 
-elif menu == "STEM Data Explorer":
-    st.title("STEM Data Explorer")
-    st.sidebar.header("Data Selection")
-    
-    # Tabbed view for STEM data
-    data_option = st.sidebar.selectbox(
-        "Choose a dataset to explore", 
-        ["Physics Experiments", "Astronomy Observations", "Weather Data"]
-    )
+    st.markdown("""
+    **What I focus on:**
+    - Translating complex data into clear insights  
+    - Ensuring data quality and reliability  
+    - Supporting policy and institutional decisions  
+    """)
 
-    if data_option == "Physics Experiments":
-        st.write("### Physics Experiment Data")
-        st.dataframe(physics_data)
-        # Add widget to filter by Energy levels
-        energy_filter = st.slider("Filter by Energy (MeV)", 0.0, 10.0, (0.0, 10.0))
-        filtered_physics = physics_data[
-            physics_data["Energy (MeV)"].between(energy_filter[0], energy_filter[1])
-        ]
-        st.write(f"Filtered Results for Energy Range {energy_filter}:")
-        st.dataframe(filtered_physics)
+# -------------------------------------------------
+# SKILLS
+# -------------------------------------------------
+elif menu == "Skills":
 
-    elif data_option == "Astronomy Observations":
-        st.write("### Astronomy Observation Data")
-        st.dataframe(astronomy_data)
-        # Add widget to filter by Brightness
-        brightness_filter = st.slider("Filter by Brightness (Magnitude)", -15.0, 5.0, (-15.0, 5.0))
-        filtered_astronomy = astronomy_data[
-            astronomy_data["Brightness (Magnitude)"].between(brightness_filter[0], brightness_filter[1])
-        ]
-        st.write(f"Filtered Results for Brightness Range {brightness_filter}:")
-        st.dataframe(filtered_astronomy)
+    st.header("Technical Skills")
 
-    elif data_option == "Weather Data":
-        st.write("### Weather Data")
-        st.dataframe(weather_data)
-        # Add widgets to filter by temperature and humidity
-        temp_filter = st.slider("Filter by Temperature (°C)", -10.0, 40.0, (-10.0, 40.0))
-        humidity_filter = st.slider("Filter by Humidity (%)", 0, 100, (0, 100))
-        filtered_weather = weather_data[
-            weather_data["Temperature (°C)"].between(temp_filter[0], temp_filter[1]) &
-            weather_data["Humidity (%)"].between(humidity_filter[0], humidity_filter[1])
-        ]
-        st.write(f"Filtered Results for Temperature {temp_filter} and Humidity {humidity_filter}:")
-        st.dataframe(filtered_weather)
-        
-        
+    skills = {
+        "Python": 90,
+        "SQL": 80,
+        "Power BI": 85,
+        "R": 75,
+        "SAS": 70,
+        "Statistics": 90
+    }
 
+    for skill, level in skills.items():
+        st.write(f"**{skill}**")
+        st.markdown(
+            f'<div class="skill-bar"><div class="skill-fill" style="width:{level}%"></div></div>',
+            unsafe_allow_html=True
+        )
+
+# -------------------------------------------------
+# EXPERIENCE
+# -------------------------------------------------
+elif menu == "Experience":
+
+    st.header("Experience")
+
+    st.markdown("""
+    <div class="timeline">
+        <h4>Junior Data Analyst — CPUT</h4>
+        <p><i>June 2025 – Present</i></p>
+        <ul>
+            <li>Built dashboards for institutional reporting</li>
+            <li>Designed and analyzed surveys</li>
+            <li>Applied predictive and ML techniques</li>
+        </ul>
+
+        <h4>Data Analyst Intern — Statistics South Africa</h4>
+        <p><i>July 2024 – Dec 2024</i></p>
+        <ul>
+            <li>Developed agricultural data collection system</li>
+            <li>Improved data quality monitoring</li>
+            <li>Worked with Python, R, SQL, HTML/CSS</li>
+        </ul>
+    </div>
+    """, unsafe_allow_html=True)
+
+# -------------------------------------------------
+# PROJECTS
+# -------------------------------------------------
+elif menu == "Projects":
+
+    st.header("Projects")
+
+    col1, col2 = st.columns(2)
+
+    with col1:
+        st.markdown("""
+        <div class="card">
+            <h4>🦟 Zika Virus Mathematical Model</h4>
+            <p>Compartmental modeling with awareness and control strategies.
+            Stability analysis and sensitivity simulations.</p>
+            <b>Tools:</b> MATLAB, Numerical Methods
+        </div>
+        """, unsafe_allow_html=True)
+
+    with col2:
+        st.markdown("""
+        <div class="card">
+            <h4>🌱 Agriculture Data Collection Platform</h4>
+            <p>Web-based survey platform replacing paper-based collection at Stats SA.</p>
+            <b>Tools:</b> Python, Flask, SQLAlchemy
+        </div>
+        """, unsafe_allow_html=True)
+
+# -------------------------------------------------
+# EDUCATION
+# -------------------------------------------------
+elif menu == "Education":
+
+    st.header("Education")
+
+    st.markdown("""
+    <div class="card">
+        <h4>Postgraduate Diploma in Mathematical Science (NQF 8)</h4>
+        <p><b>Status:</b> Currently Pursuing</p>
+        <p>Bayesian Statistics · Machine Learning · Data Engineering</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+# -------------------------------------------------
+# CONTACT
+# -------------------------------------------------
 elif menu == "Contact":
-    # Add a contact section
-    st.header("Contact Information")
-    email = "khethiwentshangase22@gmail.com"
 
-    st.write(f"You can reach me at {email}.")
+    st.header("Let’s Connect")
+
+    col1, col2 = st.columns(2)
+
+    with col1:
+        st.write("📧 philasandetshusha1@gmail.com")
+        st.write("📞 +27 78 643 9409")
+        st.markdown("[LinkedIn](https://www.linkedin.com/in/philasande-tshutsha-7434a026b)")
+
+    with col2:
+        st.text_input("Name")
+        st.text_input("Email")
+        st.text_area("Message")
+        st.button("Send Message 🚀")
+
 
 
