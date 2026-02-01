@@ -1,67 +1,78 @@
 import streamlit as st
-import pandas as pd
 
 # -------------------------------------------------
 # PAGE CONFIG
 # -------------------------------------------------
 st.set_page_config(
     page_title="Philasande Tshusha | Data Analyst Portfolio",
-    page_icon="📊",
     layout="wide"
 )
 
 # -------------------------------------------------
-# GLOBAL STYLES
+# GLOBAL STYLES (STYLE ONLY)
 # -------------------------------------------------
 st.markdown("""
 <style>
-.hero {
-    background: linear-gradient(120deg, #0b5fff, #4f8cff);
-    padding: 40px;
-    border-radius: 18px;
-    color: white;
-}
-.hero h1 { font-size: 48px; margin-bottom: 0; }
-.hero p { font-size: 18px; opacity: 0.95; }
 
-.kpi {
-    background: #f5f7ff;
-    padding: 18px;
-    border-radius: 14px;
-    text-align: center;
+/* Global font */
+html, body, [class*="css"] {
+    font-family: "Segoe UI", sans-serif;
 }
 
-.timeline {
-    border-left: 3px solid #0b5fff;
-    padding-left: 20px;
-    margin-left: 5px;
+/* Sidebar */
+section[data-testid="stSidebar"] {
+    background: linear-gradient(180deg, #0b5fff, #4f8cff);
+}
+section[data-testid="stSidebar"] * {
+    color: white !important;
 }
 
+/* Titles */
+.profile-title {
+    font-size: 38px;
+    font-weight: 700;
+    color: #0b5fff;
+}
+.profile-sub {
+    font-size: 16px;
+    color: #444;
+    margin-bottom: 12px;
+}
+
+/* Cards */
 .card {
-    background: #ffffff;
-    padding: 18px;
-    border-radius: 14px;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+    background-color: #f8f9ff;
+    padding: 22px;
+    border-radius: 18px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+    margin-bottom: 20px;
 }
 
-.skill-bar {
-    height: 8px;
-    background: #e0e6ff;
-    border-radius: 5px;
+/* Buttons */
+.stButton > button {
+    background-color: #0b5fff;
+    color: white;
+    border-radius: 10px;
+    padding: 8px 16px;
+    border: none;
 }
-.skill-fill {
-    height: 8px;
-    background: #0b5fff;
-    border-radius: 5px;
+.stButton > button:hover {
+    background-color: #0846cc;
 }
+
+/* Images */
+img {
+    border-radius: 18px;
+}
+
 </style>
 """, unsafe_allow_html=True)
 
 # -------------------------------------------------
-# SIDEBAR
+# SIDEBAR NAVIGATION
 # -------------------------------------------------
 menu = st.sidebar.radio(
-    "📌 Navigation",
+    "Navigate",
     ["Home", "About", "Skills", "Experience", "Projects", "Education", "Contact"]
 )
 
@@ -70,38 +81,34 @@ menu = st.sidebar.radio(
 # -------------------------------------------------
 if menu == "Home":
 
-    st.markdown("""
-    <div class="hero">
-        <h1>Philasande Tshusha</h1>
-        <p>Junior Data Analyst • Mathematical Science • Turning Data into Decisions</p>
-    </div>
-    """, unsafe_allow_html=True)
+    col1, col2 = st.columns([2, 1])
 
-    st.write("")
-
-    col1, col2, col3, col4 = st.columns(4)
-    col1.markdown('<div class="kpi"><h2>3+</h2><p>Years Study</p></div>', unsafe_allow_html=True)
-    col2.markdown('<div class="kpi"><h2>15+</h2><p>Datasets Analyzed</p></div>', unsafe_allow_html=True)
-    col3.markdown('<div class="kpi"><h2>5+</h2><p>Dashboards Built</p></div>', unsafe_allow_html=True)
-    col4.markdown('<div class="kpi"><h2>2</h2><p>Public Sector Roles</p></div>', unsafe_allow_html=True)
-
-    st.divider()
-
-    col1, col2 = st.columns([2,1])
     with col1:
-        st.subheader("👋 Who I Am")
-        st.write("""
-        I am a **Mathematical Science graduate and Junior Data Analyst** with experience in
-        public sector analytics, survey data analysis, dashboard development, and applied modeling.
+        st.markdown('<div class="card">', unsafe_allow_html=True)
 
-        I enjoy working at the intersection of **statistics, programming, and decision-making**.
-        """)
+        st.markdown('<div class="profile-title">Philasande Tshusha</div>', unsafe_allow_html=True)
+        st.markdown(
+            '<div class="profile-sub">Junior Data Analyst | Mathematical Science | Python, SQL, Power BI</div>',
+            unsafe_allow_html=True
+        )
+
+        st.write(
+            """
+            Detail-oriented Junior Data Analyst with a strong foundation in applied mathematical sciences,
+            statistical analysis, and data management. Experienced in dashboard development, survey data
+            analysis, and predictive modeling to support data-driven decision-making.
+            """
+        )
+
+        st.markdown('</div>', unsafe_allow_html=True)
 
     with col2:
         st.image(
-            "https://media.licdn.com/dms/image/v2/D4D35AQG6X6LSjA1GwQ/profile-framedphoto-shrink_400_400/B4DZX3nnFdGwAc-/0/1743616111229",
-            width=260
+            "https://media.licdn.com/dms/image/v2/D4D35AQG6X6LSjA1GwQ/profile-framedphoto-shrink_400_400/B4DZX3nnFdGwAc-/0/1743616111229?e=1770577200&v=beta&t=w0Pxo8-H_thPr4qyn7HNh66yvcifjzJKL7g-4gQWH4w",
+            width=300
         )
+
+    st.divider()
 
 # -------------------------------------------------
 # ABOUT
@@ -109,17 +116,31 @@ if menu == "Home":
 elif menu == "About":
 
     st.header("About Me")
+
+    st.markdown('<div class="card">', unsafe_allow_html=True)
+
+    st.write(
+        """
+        I am a Mathematical Science graduate with strong foundations in statistics,
+        numerical methods, and computational problem-solving.
+
+        My work focuses on transforming raw data into actionable insights through:
+        """
+    )
+
     st.write("""
-    My background in **Mathematical Science** gives me a strong analytical foundation,
-    while my practical experience allows me to deliver **real-world data solutions**.
+    - Statistical analysis and modeling  
+    - Survey design and data quality assurance  
+    - Dashboard development and reporting  
+    - Data-driven decision support  
     """)
 
-    st.markdown("""
-    **What I focus on:**
-    - Translating complex data into clear insights  
-    - Ensuring data quality and reliability  
-    - Supporting policy and institutional decisions  
-    """)
+    col1, col2, col3 = st.columns(3)
+    col1.metric("Highest Qualification", "Advanced Diploma")
+    col2.metric("Field", "Mathematical Science")
+    col3.metric("Industry Experience", "Public Sector")
+
+    st.markdown('</div>', unsafe_allow_html=True)
 
 # -------------------------------------------------
 # SKILLS
@@ -128,48 +149,62 @@ elif menu == "Skills":
 
     st.header("Technical Skills")
 
-    skills = {
-        "Python": 90,
-        "SQL": 80,
-        "Power BI": 85,
-        "R": 75,
-        "SAS": 70,
-        "Statistics": 90
-    }
+    col1, col2 = st.columns(2)
 
-    for skill, level in skills.items():
-        st.write(f"**{skill}**")
-        st.markdown(
-            f'<div class="skill-bar"><div class="skill-fill" style="width:{level}%"></div></div>',
-            unsafe_allow_html=True
-        )
+    with col1:
+        st.markdown('<div class="card">', unsafe_allow_html=True)
+        st.subheader("Core Data Skills")
+        st.write("""
+        - Python (Pandas, NumPy, Flask)
+        - SQL (SQLite, database queries)
+        - Power BI (Dashboards & reporting)
+        - R (Statistical analysis)
+        - SAS
+        """)
+        st.markdown('</div>', unsafe_allow_html=True)
+
+    with col2:
+        st.markdown('<div class="card">', unsafe_allow_html=True)
+        st.subheader("Mathematical & Analytical Skills")
+        st.write("""
+        - Mathematical Statistics
+        - Numerical Methods
+        - Machine Learning (coursework)
+        - Differential Equations
+        - Optimization Techniques
+        """)
+        st.markdown('</div>', unsafe_allow_html=True)
 
 # -------------------------------------------------
 # EXPERIENCE
 # -------------------------------------------------
 elif menu == "Experience":
 
-    st.header("Experience")
+    st.header("Work Experience")
 
-    st.markdown("""
-    <div class="timeline">
-        <h4>Junior Data Analyst — CPUT</h4>
-        <p><i>June 2025 – Present</i></p>
-        <ul>
-            <li>Built dashboards for institutional reporting</li>
-            <li>Designed and analyzed surveys</li>
-            <li>Applied predictive and ML techniques</li>
-        </ul>
+    st.markdown('<div class="card">', unsafe_allow_html=True)
 
-        <h4>Data Analyst Intern — Statistics South Africa</h4>
-        <p><i>July 2024 – Dec 2024</i></p>
-        <ul>
-            <li>Developed agricultural data collection system</li>
-            <li>Improved data quality monitoring</li>
-            <li>Worked with Python, R, SQL, HTML/CSS</li>
-        </ul>
-    </div>
-    """, unsafe_allow_html=True)
+    st.subheader("Junior Data Analyst — Cape Peninsula University of Technology")
+    st.caption("June 2025 – Present")
+    st.write("""
+    - Develop dashboards for internal and external reporting  
+    - Support teams in designing and refining surveys  
+    - Apply predictive methods using machine learning techniques  
+    - Contribute to student success initiatives through data-driven insights  
+    """)
+
+    st.divider()
+
+    st.subheader("Data Analyst Intern — Statistics South Africa")
+    st.caption("July 2024 – December 2024")
+    st.write("""
+    - Designed and developed a data collection website for agricultural data  
+    - Assisted with data quality monitoring to ensure accurate reporting  
+    - Processed and analyzed datasets using R and Python  
+    - Gained practical exposure to HTML, CSS, SQLite, and Python  
+    """)
+
+    st.markdown('</div>', unsafe_allow_html=True)
 
 # -------------------------------------------------
 # PROJECTS
@@ -178,26 +213,55 @@ elif menu == "Projects":
 
     st.header("Projects")
 
-    col1, col2 = st.columns(2)
+    with st.expander("📊 Zika Virus Mathematical Model"):
+        st.markdown('<div class="card">', unsafe_allow_html=True)
+        st.write("""
+        In this paper we discuss Zika virus, a mosquito-borne virus first identified in Uganda and
+        currently dominant in tropical and subtropical regions. We devise and analyze a model
+        that accounts for both vector and sexual transmission, and we investigate the effects of
+        human awareness and vector control (excluding disease-caused mortality). We derive the
+        disease-free and endemic equilibrium points and show the disease-free equilibrium is
+        locally stable when R0 < 1 while the endemic equilibrium is locally stable when R0 > 1.
+        We perform a partial rank correlation coefficient analysis for the basic reproduction number
+        to identify parameters that increase R0, and we conduct sensitivity analyses by running
+        simulations in MATLAB (Euler's method) while varying key parameters. Our results
+        highlight which control measures are most effective at slowing the spread of the virus.
+        """)
+        st.write("**Tools:** MATLAB, Differential Equations, Numerical Simulation")
+        st.markdown('</div>', unsafe_allow_html=True)
 
-    with col1:
-        st.markdown("""
-        <div class="card">
-            <h4>🦟 Zika Virus Mathematical Model</h4>
-            <p>Compartmental modeling with awareness and control strategies.
-            Stability analysis and sensitivity simulations.</p>
-            <b>Tools:</b> MATLAB, Numerical Methods
-        </div>
-        """, unsafe_allow_html=True)
+    with st.expander("🌱 Agriculture Data Collection Platform"):
+        st.markdown('<div class="card">', unsafe_allow_html=True)
+        st.write("""
+        This research developed and implemented a user-friendly web-based data collection
+        platform to improve data collection for the agricultural sector of Statistics South
+        Africa (Stats SA). The current pen-and-paper method is inefficient, costly, time-consuming,
+        and prone to human error; an online survey platform provides a more efficient,
+        cost-effective, and scalable alternative. The front end was built with HTML, CSS, and
+        JavaScript while the backend uses Flask (Python) and SQLAlchemy for data storage.
+        A pilot study with 17 participants from the Western Cape Stats SA office reported an
+        82% completion rate and reduced data collection time. Key features include real-time
+        data validation, improved accuracy, enhanced data security, a built-in chatbot, and
+        scalability. Despite limitations such as no email validation in the pilot, the platform
+        demonstrates strong potential to simplify and scale agricultural data collection for
+        Stats SA.
+        """)
+        st.write("**Tools:** Python, Flask, SQLAlchemy, HTML/CSS/JavaScript")
+        st.markdown('</div>', unsafe_allow_html=True)
 
-    with col2:
-        st.markdown("""
-        <div class="card">
-            <h4>🌱 Agriculture Data Collection Platform</h4>
-            <p>Web-based survey platform replacing paper-based collection at Stats SA.</p>
-            <b>Tools:</b> Python, Flask, SQLAlchemy
-        </div>
-        """, unsafe_allow_html=True)
+    with st.expander("🦟 Dengue Fever Modeling"):
+        st.markdown('<div class="card">', unsafe_allow_html=True)
+        st.write("""
+        Dengue fever is a mosquito-borne illness caused by four antigenically distinct viruses
+        (DENV-1 to DENV-4). To study transmission dynamics we adapt compartmental models
+        (e.g., SIR/SIRS) to include vector transmission, population immunity, and mosquito
+        population dynamics. In our analysis we estimated a basic reproduction number R0 = 4.021
+        (> 1), indicating endemic transmission under baseline assumptions. We ran simulations
+        in MATLAB for the SIRS model to evaluate future incidence and intervention scenarios,
+        demonstrating the model's utility for forecasting and planning control measures.
+        """)
+        st.write("**Tools:** MATLAB, R, Compartmental Modeling")
+        st.markdown('</div>', unsafe_allow_html=True)
 
 # -------------------------------------------------
 # EDUCATION
@@ -208,31 +272,80 @@ elif menu == "Education":
 
     st.markdown("""
     <div class="card">
-        <h4>Postgraduate Diploma in Mathematical Science (NQF 8)</h4>
-        <p><b>Status:</b> Currently Pursuing</p>
-        <p>Bayesian Statistics · Machine Learning · Data Engineering</p>
+    <h3>Postgraduate Diploma in Mathematical Science (NQF 8)</h3>
+    <b>Status:</b> Currently Pursuing
+
+    <h4>Coursework</h4>
+    <ul>
+        <li>Bayesian Statistics</li>
+        <li>Advanced Programming for Data Science</li>
+        <li>Convex Optimisation</li>
+        <li>Machine Learning 5A & 5B</li>
+        <li>Data Engineering & Visualisation</li>
+    </ul>
+
+    <h4>Tools</h4>
+    SAS · R · Python · SQL · Power BI · Tableau
     </div>
     """, unsafe_allow_html=True)
+
+    st.markdown('<div class="card">', unsafe_allow_html=True)
+    st.subheader("Advanced Diploma in Mathematical Science")
+    st.caption("Cape Peninsula University of Technology | 2025")
+    st.write("""
+    Relevant Coursework:
+    - Machine Learning & Data Science
+    - Mathematical Statistics
+    - Numerical Methods
+    - Mathematical Analysis
+    - Biostatistics
+    """)
+    st.markdown('</div>', unsafe_allow_html=True)
+
+    st.markdown('<div class="card">', unsafe_allow_html=True)
+    st.subheader("Diploma in Mathematical Science")
+    st.caption("Cape Peninsula University of Technology | 2022 – 2024")
+    st.write("""
+    - Programming (Python, R, SAS)
+    - Data Management
+    - Operations Research
+    - Biomathematics
+    - Mathematical Science Project
+    """)
+    st.markdown('</div>', unsafe_allow_html=True)
 
 # -------------------------------------------------
 # CONTACT
 # -------------------------------------------------
 elif menu == "Contact":
 
-    st.header("Let’s Connect")
+    st.header("Contact Information")
 
     col1, col2 = st.columns(2)
 
     with col1:
-        st.write("📧 philasandetshusha1@gmail.com")
-        st.write("📞 +27 78 643 9409")
-        st.markdown("[LinkedIn](https://www.linkedin.com/in/philasande-tshutsha-7434a026b)")
+        st.markdown('<div class="card">', unsafe_allow_html=True)
+        st.write("📧 **Email:** philasandetshusha1@gmail.com")
+        st.write("📞 **Phone:** +27 78 643 9409")
+        st.write("📍 **Location:** South Africa")
+        st.markdown(
+            "[LinkedIn Profile](https://www.linkedin.com/in/philasande-tshutsha-7434a026b)"
+        )
+        st.markdown('</div>', unsafe_allow_html=True)
 
     with col2:
-        st.text_input("Name")
-        st.text_input("Email")
-        st.text_area("Message")
-        st.button("Send Message 🚀")
+        st.markdown('<div class="card">', unsafe_allow_html=True)
+        st.subheader("Send a Message")
+
+        name = st.text_input("Full Name")
+        email = st.text_input("Email Address")
+        message = st.text_area("Message")
+
+        if st.button("Send"):
+            st.success("Thank you! Your message has been sent.")
+
+        st.markdown('</div>', unsafe_allow_html=True)
+
 
 
 
