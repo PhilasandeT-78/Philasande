@@ -356,6 +356,8 @@ elif menu == "Contact":
         if st.button("Send"):
             st.success("Thank you! Your message has been sent.")
 
+dark_mode = st.sidebar.toggle("🌙 Dark Mode", value=False)
+
 
 
 
