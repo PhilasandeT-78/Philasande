@@ -86,7 +86,7 @@ elif menu == "Education":
     # Postgraduate Diploma
     # -----------------------------
 
-    st.subheader("Postgraduate Diploma in Mathematical Science")
+    st.subheader("Postgraduate Diploma in Mathematical Science (NQF 8)")
     st.write("**Status:** Currently Pursuing")
 
     st.markdown("### Coursework")
@@ -172,6 +172,7 @@ elif menu == "Contact":
 
     st.write("You can reach me at:")
     st.write(f"📧 {email}")
+
 
 
 
