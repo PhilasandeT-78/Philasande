@@ -125,7 +125,6 @@ elif menu == "About":
     <div class="card">
     I am a Mathematical Science graduate with strong foundations in statistics,
     numerical methods, and computational problem-solving.
-    <br><br>
     My work focuses on transforming raw data into actionable insights through
     statistical modelling, dashboard development, and data-driven decision support.
     </div>
@@ -358,6 +357,7 @@ elif menu == "Contact":
             
             
             dark_mode = st.sidebar.toggle("🌙 Dark Mode", value=False)
+
 
 
 
