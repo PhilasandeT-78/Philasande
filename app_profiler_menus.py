@@ -11,59 +11,120 @@ st.set_page_config(
 # -------------------------------------------------
 # GLOBAL STYLES (STYLE ONLY)
 # -------------------------------------------------
-st.markdown("""
+st.markdown(f"""
 <style>
 
-/* Global font */
-html, body, [class*="css"] {
+/* -------------------------------------------------
+   BASE (LIGHT MODE)
+--------------------------------------------------*/
+
+html, body, [class*="css"] {{
     font-family: "Segoe UI", sans-serif;
-}
+    background-color: #ffffff;
+    color: #000000;
+}}
 
-/* Sidebar */
-section[data-testid="stSidebar"] {
-    background: linear-gradient(180deg, #0b5fff, #4f8cff);
-}
-section[data-testid="stSidebar"] * {
-    color: white !important;
-}
-
-/* Titles */
-.profile-title {
+.profile-title {{
     font-size: 38px;
     font-weight: 700;
     color: #0b5fff;
-}
-.profile-sub {
+}}
+
+.profile-sub {{
     font-size: 16px;
     color: #444;
     margin-bottom: 12px;
-}
+}}
 
-/* Cards */
-.card {
+.card {{
     background-color: #f8f9ff;
     padding: 22px;
     border-radius: 18px;
     box-shadow: 0 8px 20px rgba(0,0,0,0.05);
     margin-bottom: 20px;
-}
+    animation: slideUp 0.6s ease forwards;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}}
 
-/* Buttons */
-.stButton > button {
+.card:hover {{
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+}}
+
+img {{
+    border-radius: 18px;
+    transition: transform 0.25s ease;
+}}
+img:hover {{
+    transform: scale(1.03);
+}}
+
+.stButton > button {{
     background-color: #0b5fff;
     color: white;
     border-radius: 10px;
     padding: 8px 16px;
     border: none;
-}
-.stButton > button:hover {
+    transition: background-color 0.25s ease, transform 0.2s ease;
+}}
+.stButton > button:hover {{
     background-color: #0846cc;
-}
+    transform: translateY(-2px);
+}}
 
-/* Images */
-img {
-    border-radius: 18px;
+/* Sidebar */
+section[data-testid="stSidebar"] {{
+    background: linear-gradient(180deg, #0b5fff, #4f8cff);
+}}
+section[data-testid="stSidebar"] * {{
+    color: white !important;
+}}
+
+/* -------------------------------------------------
+   DARK MODE
+--------------------------------------------------*/
+
+{"body, .main { background-color: #0e1117; color: #e6e6e6; }" if dark_mode else ""}
+
+{"h1, h2, h3, h4 { color: #9dbbff; }" if dark_mode else ""}
+
+{".profile-sub { color: #b0b0b0; }" if dark_mode else ""}
+
+{".card { background-color: #1c1f26; box-shadow: 0 10px 30px rgba(0,0,0,0.6); }" if dark_mode else ""}
+
+{".stButton > button { background-color: #4f8cff; }" if dark_mode else ""}
+
+{".stButton > button:hover { background-color: #6b9cff; }" if dark_mode else ""}
+
+{"""
+section[data-testid="stSidebar"] {
+    background: linear-gradient(180deg, #0a0d14, #151922);
 }
+""" if dark_mode else ""}
+
+/* -------------------------------------------------
+   ANIMATIONS
+--------------------------------------------------*/
+
+@keyframes slideUp {{
+    from {{
+        opacity: 0;
+        transform: translateY(18px);
+    }}
+    to {{
+        opacity: 1;
+        transform: translateY(0);
+    }}
+}}
+
+.main {{
+    animation: fadeIn 0.6s ease-in;
+}}
+
+@keyframes fadeIn {{
+    from {{ opacity: 0; }}
+    to {{ opacity: 1; }}
+}}
 
 </style>
 """, unsafe_allow_html=True)
@@ -345,6 +406,7 @@ elif menu == "Contact":
             st.success("Thank you! Your message has been sent.")
 
         st.markdown('</div>', unsafe_allow_html=True)
+
 
 
 
