@@ -1,5 +1,4 @@
 import streamlit as st
-import pandas as pd
 
 # ---------------------------------------------------
 # Page Configuration
@@ -18,31 +17,8 @@ st.sidebar.title("Navigation")
 
 menu = st.sidebar.radio(
     "Go to:",
-    ["Data Analyst Profile", "Publications", "STEM Data Explorer", "Contact"]
+    ["Data Analyst Profile", "Education", "Work Experience & Projects", "Contact"]
 )
-
-# ---------------------------------------------------
-# Dummy STEM Data
-# ---------------------------------------------------
-
-physics_data = pd.DataFrame({
-    "Experiment": ["Alpha Decay", "Beta Decay", "Gamma Ray Analysis", "Quark Study", "Higgs Boson"],
-    "Energy (MeV)": [4.2, 1.5, 2.9, 3.4, 7.1],
-    "Date": pd.date_range(start="2024-01-01", periods=5)
-})
-
-astronomy_data = pd.DataFrame({
-    "Celestial Object": ["Mars", "Venus", "Jupiter", "Saturn", "Moon"],
-    "Brightness (Magnitude)": [-2.0, -4.6, -1.8, 0.2, -12.7],
-    "Observation Date": pd.date_range(start="2024-01-01", periods=5)
-})
-
-weather_data = pd.DataFrame({
-    "City": ["Cape Town", "London", "New York", "Tokyo", "Sydney"],
-    "Temperature (°C)": [25, 10, -3, 15, 30],
-    "Humidity (%)": [65, 70, 55, 80, 50],
-    "Recorded Date": pd.date_range(start="2024-01-01", periods=5)
-})
 
 # ---------------------------------------------------
 # Data Analyst Profile Section
@@ -51,7 +27,6 @@ weather_data = pd.DataFrame({
 if menu == "Data Analyst Profile":
 
     st.title("Data Analyst Profile")
-    st.sidebar.header("Profile Options")
 
     name = "Khethiwe Ntshangase"
     field = "Mathematics and Physics"
@@ -67,135 +42,123 @@ if menu == "Data Analyst Profile":
     )
 
 # ---------------------------------------------------
-# Publications Section
+# Education Section
 # ---------------------------------------------------
 
-elif menu == "Publications":
+elif menu == "Education":
 
-    st.title("Publications")
-    st.sidebar.header("Upload and Filter")
+    st.title("Education")
 
-    uploaded_file = st.file_uploader(
-        "Upload a CSV of Publications",
-        type="csv"
-    )
+    # -----------------------------
+    # Advanced Diploma
+    # -----------------------------
 
-    if uploaded_file:
+    st.subheader("Advanced Diploma in Mathematical Sciences (NQF 7)")
+    st.write("**Institution:** Cape Peninsula University of Technology")
+    st.write("**Status:** Completed — December 2025")
 
-        publications = pd.read_csv(uploaded_file)
+    st.markdown("### Coursework")
+    st.markdown("""
+    - Mathematical Statistics  
+    - Statistics  
+    - Machine Learning and Data Science  
+    - Econometrics  
+    - Financial Mathematics  
+    - Finance  
+    - Time Series Forecasting  
+    - Numerical Methods  
+    - Programming  
+    """)
 
-        st.subheader("Uploaded Publications")
-        st.dataframe(publications)
+    st.markdown("### Tools")
+    st.markdown("""
+    - SAS  
+    - R  
+    - Python  
+    - SQL  
+    - Microsoft Office  
+    - Power BI  
+    """)
 
-        keyword = st.text_input("Filter by keyword")
+    st.divider()
 
-        if keyword:
+    # -----------------------------
+    # Postgraduate Diploma
+    # -----------------------------
 
-            filtered = publications[
-                publications.apply(
-                    lambda row: keyword.lower() in row.astype(str).str.lower().values,
-                    axis=1
-                )
-            ]
+    st.subheader("Postgraduate Diploma in Mathematical Science")
+    st.write("**Status:** Currently Pursuing")
 
-            st.subheader("Filtered Results")
-            st.dataframe(filtered)
+    st.markdown("### Coursework")
+    st.markdown("""
+    - Bayesian Statistics  
+    - Advanced Programming for Data Science  
+    - Convex Optimisation  
+    - Machine Learning 5A & 5B  
+    - Data Engineering and Visualization  
+    - Mathematical Modelling  
+    - Computational Methods  
+    - Research Project  
+    """)
 
-        else:
-            st.info("Showing all publications")
-
-        if "Year" in publications.columns:
-
-            st.subheader("Publication Trends")
-
-            year_counts = publications["Year"].value_counts().sort_index()
-
-            st.bar_chart(year_counts)
-
-        else:
-            st.warning("No 'Year' column found for trend visualization.")
+    st.markdown("### Tools")
+    st.markdown("""
+    - SAS  
+    - R  
+    - Python  
+    - SQL  
+    - Microsoft Office  
+    - Power BI  
+    - Tableau  
+    """)
 
 # ---------------------------------------------------
-# STEM Data Explorer Section
+# Work Experience & Projects Section
 # ---------------------------------------------------
 
-elif menu == "STEM Data Explorer":
+elif menu == "Work Experience & Projects":
 
-    st.title("STEM Data Explorer")
-    st.sidebar.header("Data Selection")
+    st.title("Work Experience & Projects")
 
-    data_option = st.sidebar.selectbox(
-        "Choose a dataset",
-        ["Physics Experiments", "Astronomy Observations", "Weather Data"]
-    )
+    # -----------------------------
+    # Work Experience
+    # -----------------------------
 
-    # Physics Data
-    if data_option == "Physics Experiments":
+    st.subheader("Data Analyst Intern")
+    st.write("**Organization:** Statistics South Africa (Stats SA)")
+    st.write("**Duration:** July 2024 – December 2024")
 
-        st.subheader("Physics Experiment Data")
-        st.dataframe(physics_data)
+    st.markdown("""
+    **Responsibilities & Achievements:**
+    - Cleaned, validated, and prepared large survey datasets using R, ensuring data integrity and accuracy.  
+    - Performed statistical summaries and exploratory analysis to identify trends and data quality issues.  
+    - Produced tables, charts, and analytical reports for internal stakeholders.  
+    - Investigated data inconsistencies, tested statistical assumptions, and verified outputs.  
+    - Collaborated with senior statisticians during reporting cycles and data verification processes.  
+    - Gained professional exposure to SAS, SPSS, and Python in a production analytics environment.  
+    """)
 
-        energy_filter = st.slider(
-            "Filter by Energy (MeV)",
-            0.0,
-            10.0,
-            (0.0, 10.0)
-        )
+    st.divider()
 
-        filtered_physics = physics_data[
-            physics_data["Energy (MeV)"].between(energy_filter[0], energy_filter[1])
-        ]
+    # -----------------------------
+    # Projects
+    # -----------------------------
 
-        st.write("Filtered Results")
-        st.dataframe(filtered_physics)
+    st.subheader("Projects")
 
-    # Astronomy Data
-    elif data_option == "Astronomy Observations":
+    st.markdown("### Impact of Socio-Economic Factors on Education Outcomes (R)")
+    st.markdown("""
+    - Analysed large-scale survey datasets using R for data cleaning, preprocessing, and exploratory analysis.  
+    - Applied multinomial logistic regression to model relationships and predict education outcomes.  
+    - Summarised findings through clear reporting and data visualisations.  
+    """)
 
-        st.subheader("Astronomy Observation Data")
-        st.dataframe(astronomy_data)
-
-        brightness_filter = st.slider(
-            "Filter by Brightness (Magnitude)",
-            -15.0,
-            5.0,
-            (-15.0, 5.0)
-        )
-
-        filtered_astronomy = astronomy_data[
-            astronomy_data["Brightness (Magnitude)"].between(brightness_filter[0], brightness_filter[1])
-        ]
-
-        st.write("Filtered Results")
-        st.dataframe(filtered_astronomy)
-
-    # Weather Data
-    elif data_option == "Weather Data":
-
-        st.subheader("Weather Data")
-        st.dataframe(weather_data)
-
-        temp_filter = st.slider(
-            "Filter by Temperature (°C)",
-            -10.0,
-            40.0,
-            (-10.0, 40.0)
-        )
-
-        humidity_filter = st.slider(
-            "Filter by Humidity (%)",
-            0,
-            100,
-            (0, 100)
-        )
-
-        filtered_weather = weather_data[
-            weather_data["Temperature (°C)"].between(temp_filter[0], temp_filter[1]) &
-            weather_data["Humidity (%)"].between(humidity_filter[0], humidity_filter[1])
-        ]
-
-        st.write("Filtered Results")
-        st.dataframe(filtered_weather)
+    st.markdown("### Data Analytics on Student Debt (R & Power BI)")
+    st.markdown("""
+    - Processed demographic and financial datasets using R.  
+    - Conducted multiple linear regression for predictive analysis.  
+    - Designed interactive Power BI dashboards to visualise trends and key insights.  
+    """)
 
 # ---------------------------------------------------
 # Contact Section
@@ -209,5 +172,7 @@ elif menu == "Contact":
 
     st.write("You can reach me at:")
     st.write(f"📧 {email}")
+
+
 
 
